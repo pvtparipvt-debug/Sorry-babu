@@ -1,0 +1,428 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sorry Babuu 💌</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Arial", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ffd6e7, #ffeef5, #fff7fb);
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+
+    .screen {
+      display: none;
+      width: 100%;
+      max-width: 420px;
+      min-height: 680px;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(12px);
+      border-radius: 28px;
+      box-shadow: 0 18px 45px rgba(255, 112, 157, 0.25);
+      padding: 28px 22px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 0.5s ease;
+      border: 2px solid rgba(255,255,255,0.6);
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .top-hearts, .floating-hearts {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.75;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100px) scale(0.7);
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-850px) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    .panda-wrap {
+      margin-top: 8px;
+      margin-bottom: 16px;
+      animation: bounce 2.2s infinite ease-in-out;
+      position: relative;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .pandas {
+      font-size: 58px;
+      letter-spacing: 6px;
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,0.08));
+    }
+
+    .sparkle {
+      position: absolute;
+      font-size: 22px;
+      animation: twinkle 1.8s infinite ease-in-out;
+    }
+
+    .sparkle.s1 { top: -4px; left: 72px; }
+    .sparkle.s2 { top: 12px; right: 72px; animation-delay: .6s; }
+    .sparkle.s3 { bottom: -8px; left: 110px; animation-delay: 1.1s; }
+
+    @keyframes twinkle {
+      0%,100% { transform: scale(0.8); opacity: 0.5; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
+
+    h1 {
+      font-size: 30px;
+      color: #ff4f8b;
+      margin-bottom: 10px;
+      line-height: 1.25;
+      text-shadow: 0 3px 10px rgba(255, 118, 160, 0.18);
+    }
+
+    .sub {
+      font-size: 16px;
+      color: #7d5b66;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .cute-box {
+      background: rgba(255,255,255,0.7);
+      border: 2px dashed #ffb7cf;
+      border-radius: 22px;
+      padding: 18px 16px;
+      margin: 18px 0 22px;
+      color: #6e4d58;
+      line-height: 1.8;
+      font-size: 16px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5);
+    }
+
+    .btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    button {
+      border: none;
+      outline: none;
+      padding: 14px 20px;
+      min-width: 130px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow: 0 10px 20px rgba(255, 119, 162, 0.18);
+    }
+
+    .yes-btn {
+      background: linear-gradient(135deg, #ff6ea8, #ff8fbd);
+      color: white;
+    }
+
+    .no-btn {
+      background: white;
+      color: #ff5c96;
+      border: 2px solid #ffc0d7;
+    }
+
+    button:hover {
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    .mini {
+      margin-top: 14px;
+      color: #9a7682;
+      font-size: 13px;
+    }
+
+    .note {
+      margin-top: 12px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,241,246,0.95));
+      border: 2px solid #ffd1e1;
+      border-radius: 24px;
+      padding: 20px 18px;
+      text-align: left;
+      line-height: 1.95;
+      color: #6d4d59;
+      box-shadow: 0 10px 25px rgba(255, 120, 165, 0.15);
+      font-size: 16px;
+    }
+
+    .big-love {
+      font-size: 42px;
+      margin: 12px 0;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+
+    .footer-love {
+      margin-top: 18px;
+      font-size: 15px;
+      color: #ff5d97;
+      font-weight: 700;
+    }
+
+    .sticker-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      font-size: 28px;
+      margin: 10px 0 6px;
+      flex-wrap: wrap;
+    }
+
+    .kiss {
+      font-size: 22px;
+      margin-top: 12px;
+    }
+
+    .small-note {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #9a7c86;
+    }
+
+    .corner-bow {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      font-size: 28px;
+      transform: rotate(12deg);
+    }
+
+    .corner-heart {
+      position: absolute;
+      bottom: 14px;
+      left: 16px;
+      font-size: 26px;
+      animation: pulse 1.7s infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1 -->
+  <div class="screen active" id="page1">
+    <div class="top-hearts" id="hearts1"></div>
+    <div class="corner-bow">🎀</div>
+    <div class="corner-heart">💗</div>
+
+    <div class="panda-wrap">
+      <div class="sparkle s1">✨</div>
+      <div class="sparkle s2">⭐</div>
+      <div class="sparkle s3">💖</div>
+      <div class="pandas">🐼💞🐼</div>
+    </div>
+
+    <h1>Babuu ji... 🥺💌</h1>
+    <p class="sub">
+      Mere cute se bubu dudu panda ji… <br>
+      ek chotu sa sawal puchna tha 👉👈
+    </p>
+
+    <div class="cute-box">
+      <b>1. Aap gussa ho ji? 😭💭</b><br><br>
+      Please sach sach batao na babuhh…
+    </div>
+
+    <div class="btns">
+      <button class="yes-btn" onclick="showPage(2)">Haan ji 😤</button>
+      <button class="no-btn" onclick="showPage(4)">Nahi ji 🥹</button>
+    </div>
+
+    <div class="mini">Agar gussa nahi ho to seedha pyaar wala note khul jayega 💞</div>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="screen" id="page2">
+    <div class="top-hearts" id="hearts2"></div>
+    <div class="corner-bow">🎀</div>
+    <div class="corner-heart">💗</div>
+
+    <div class="panda-wrap">
+      <div class="pandas">🐼🌸🐼</div>
+    </div>
+
+    <h1>Maaf krdo babuu plz 🥺💗</h1>
+    <p class="sub">
+      Gussa thoda sa kam karo na ji…<br>
+      mera dil bohot sad sad ho raha hai 😭
+    </p>
+
+    <div class="cute-box">
+      <b>2. Thoda sa maaf karoge? 💞</b><br><br>
+      Main promise karti hu, aise hurt nahi karungi babuhh…
+    </div>
+
+    <div class="btns">
+      <button class="yes-btn" onclick="showPage(3)">Theek h… bolo 💖</button>
+      <button class="no-btn" onclick="showPage(3)">Abhi bhi gussa hu 🙁</button>
+    </div>
+
+    <div class="mini">Dono button pe next cute sorry page hi khulega 😭👉👈</div>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="screen" id="page3">
+    <div class="top-hearts" id="hearts3"></div>
+    <div class="corner-bow">🎀</div>
+    <div class="corner-heart">💗</div>
+
+    <div class="panda-wrap">
+      <div class="pandas">🐼💗🧸💗🐼</div>
+    </div>
+
+    <h1>Babuu sorry naah 🥹</h1>
+    <p class="sub">
+      Gussa mat hoiye plzzz ji…<br>
+      aapke bina sab kuch udaas udaas lag raha hai 💔
+    </p>
+
+    <div class="cute-box">
+      <b>3. Please maaf krdo na babuhh 💌</b><br><br>
+      Main sachii soollyyy… ab aap smile kar do na 😭💞
+    </div>
+
+    <div class="btns">
+      <button class="yes-btn" onclick="showPage(4)">Maaf krdiya 💗</button>
+      <button class="no-btn" onclick="showPage(4)">Nhi krunga 😾</button>
+    </div>
+
+    <div class="mini">Iss baar bhi dono se last wala note hi open hoga 😭💖</div>
+  </div>
+
+  <!-- PAGE 4 -->
+  <div class="screen" id="page4">
+    <div class="floating-hearts" id="hearts4"></div>
+    <div class="corner-bow">🎀</div>
+    <div class="corner-heart">💗</div>
+
+    <div class="panda-wrap">
+      <div class="pandas">🐼💞🐼💞🐼</div>
+    </div>
+
+    <div class="big-love">💌</div>
+    <h1>For My Babuu Ji 🌷</h1>
+
+    <div class="sticker-row">
+      <span>🎀</span>
+      <span>💗</span>
+      <span>🧸</span>
+      <span>🌸</span>
+      <span>🐼</span>
+      <span>✨</span>
+    </div>
+
+    <div class="note">
+      <b>Babuu sorry naah…</b> 🥺💗<br><br>
+
+      Abse nhi krungi schii babuhh… <br>
+      soollyy my bacchaa jii 💞<br><br>
+
+      Aapke bina mann nahi lag raha…<br>
+      bohot sad sad sa feel ho raha hai 😭🙁<br><br>
+
+      Miss youhh babuu…<br>
+      aap gussa hote ho na to dil aur bhi zyada ro deta hai 🥺💔<br><br>
+
+      Please ek baar smile kar do…<br>
+      aur thoda sa pyaar se maaf bhi kar do ji 🌷💌<br><br>
+
+      Main aapse bohot bohot bohot pyaar karti hu babuhh 💖<br>
+      aur aapko upset dekh ke mujhe bilkul accha nahi lagta 🫶<br><br>
+
+      <b>Can we be okay again, my cute panda ji? 🐼💞</b>
+    </div>
+
+    <div class="kiss">💋💗🫂💗💋</div>
+    <div class="footer-love">Forever your soollyy baby 🌸💌</div>
+    <div class="small-note">Tap anywhere and just keep smiling babuu 🥺💖</div>
+  </div>
+
+  <script>
+    function showPage(pageNumber) {
+      document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+      });
+      document.getElementById("page" + pageNumber).classList.add("active");
+    }
+
+    function createHearts(containerId, count = 14) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      const emojis = ["💗","💖","💕","💞","✨","🌸"];
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+        heart.style.animationDelay = (Math.random() * 4) + "s";
+        heart.style.fontSize = (16 + Math.random() * 18) + "px";
+        container.appendChild(heart);
+      }
+    }
+
+    createHearts("hearts1", 12);
+    createHearts("hearts2", 12);
+    createHearts("hearts3", 12);
+    createHearts("hearts4", 18);
+  </script>
+</body>
+</html>
+```
